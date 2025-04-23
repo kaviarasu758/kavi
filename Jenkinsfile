@@ -4,8 +4,8 @@ pipeline {
     environment {
         IMAGE_NAME = 'rental-car-booking'
         CONTAINER_NAME = 'rental-car-container'
-        HOST_PORT = '8081'         // Jenkins usually uses 8080, so we expose on 8081
-        CONTAINER_PORT = '80'      // The port inside the container
+        HOST_PORT = '8081'         // Jenkins UI uses 8080
+        CONTAINER_PORT = '80'      // Change based on your app’s Dockerfile EXPOSE
     }
 
     stages {
@@ -29,6 +29,15 @@ pipeline {
                     sh "docker run -d --name ${CONTAINER_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} ${IMAGE_NAME}"
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo "Deployment successful: http://localhost:${HOST_PORT}/"
+        }
+        failure {
+            echo "Something went wrong during the pipeline!"
         }
     }
 }
