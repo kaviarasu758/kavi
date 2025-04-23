@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EliteRide - Car Rental Booking</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 20px 40px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      padding-bottom: 3px;
+      transition: all 0.3s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav ul li a:hover {
+      color: #ffd700;
+      border-color: #ffd700;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto 120px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1a237e;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+
+    form {
+      background: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      margin-top: 8px;
+      padding: 12px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      transition: border 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #3f51b5;
+      outline: none;
+      box-shadow: 0 0 6px rgba(63, 81, 181, 0.2);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .checkbox-group label {
+      font-weight: normal;
+    }
+
+    button {
+      margin-top: 30px;
+      background-color: #1a237e;
+      color: #fff;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3949ab;
+    }
+
+    #success-message {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #dff0d8;
+      color: #3c763d;
+      padding: 20px 30px;
+      border-radius: 10px;
+      border: 1px solid #c3e6cb;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    #success-message.show {
+      display: block;
+      opacity: 1;
+    }
+
+    footer {
+      background-color: #0f2027;
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 14px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Book Your Ride with EliteRide</h1>
+    <form id="booking-form">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900" required>
+
+      <label for="age">Driver's Age:</label>
+      <input type="number" id="age" name="age" min="18" placeholder="e.g. 25" required>
+
+      <label for="car">Car Model:</label>
+      <select id="car" name="car" required>
+        <option value="">-- Select a model --</option>
+        <option value="sedan">Sedan - Comfortable & Economical</option>
+        <option value="suv">SUV - Spacious & Rugged</option>
+        <option value="convertible">Convertible - Stylish & Sporty</option>
+        <option value="van">Van - Family & Group Travel</option>
+        <option value="truck">Truck - Heavy Duty Utility</option>
+      </select>
+
+      <label for="pickup-location">Pickup Location:</label>
+      <input type="text" id="pickup-location" name="pickup-location" placeholder="123 Main St, City" required>
+
+      <label for="dropoff-location">Drop-off Location:</label>
+      <input type="text" id="dropoff-location" name="dropoff-location" placeholder="e.g. Airport Terminal 2" required>
+
+      <label for="date">Rental Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Pickup Time:</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="duration">Rental Duration (Days):</label>
+      <input type="number" id="duration" name="duration" min="1" placeholder="e.g. 3" required>
+
+      <label>Extra Services:</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="extras" value="gps"> GPS Navigation</label>
+        <label><input type="checkbox" name="extras" value="baby-seat"> Baby Seat</label>
+        <label><input type="checkbox" name="extras" value="additional-driver"> Additional Driver</label>
+        <label><input type="checkbox" name="extras" value="insurance"> Full Insurance</label>
+      </div>
+
+      <label for="payment">Payment Method:</label>
+      <select id="payment" name="payment" required>
+        <option value="">-- Choose payment method --</option>
+        <option value="credit">Credit Card</option>
+        <option value="debit">Debit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="cash">Pay at Pickup</option>
+      </select>
+
+      <label for="notes">Special Instructions:</label>
+      <textarea id="notes" name="notes" rows="4" placeholder="Any specific requests or information..."></textarea>
+
+      <button type="submit">🚗 Confirm Booking</button>
+    </form>
+
+    <div id="success-message">✅ Booking confirmed! Check your email for details 🚘</div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EliteRide Car Rentals. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("booking-form");
+    const message = document.getElementById("success-message");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      form.reset();
+      message.classList.add("show");
+      setTimeout(() => {
+        message.classList.remove("show");
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
