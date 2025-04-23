@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        docker 'docker'  // Assuming the Docker tool is named 'docker' in Jenkins
+        docker 'docker'  // Name of the Docker installation in Jenkins
     }
 
     environment {
