@@ -1,10 +1,13 @@
 pipeline {
     agent any
+    tools {
+        docker 'docker'  // Assuming the Docker tool is named 'docker' in Jenkins
+    }
 
     environment {
         IMAGE_NAME = 'rental-car-booking'
         CONTAINER_NAME = 'rental-car-container'
-        HOST_PORT = '8081' // Jenkins uses 8080, so we changed this to 8081
+        HOST_PORT = '8081'
         CONTAINER_PORT = '80'
     }
 
